@@ -22,9 +22,9 @@ export default function CardsList() {
   if (error) {
     return <ErrorMessage>Error Occured!</ErrorMessage>;
   }
-  console.log(data);
+
   return (
-    <CardsListContainer>
+    <CardsListContainer data-testid="card-list">
       {data.map((media: DataType) => (
         <SingleCard key={media.id} media={media} />
       ))}

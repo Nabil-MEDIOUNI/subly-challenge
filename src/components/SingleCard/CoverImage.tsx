@@ -10,7 +10,11 @@ interface CoverImageProps {
 
 export default function CoverImage({ media }: CoverImageProps) {
   return (
-    <ImageContainer picture={media.cover} status={media.status}>
+    <ImageContainer
+      data-testid="cover-image"
+      picture={media.cover}
+      status={media.status}
+    >
       <SwitchCoverImage media={media} />
     </ImageContainer>
   );

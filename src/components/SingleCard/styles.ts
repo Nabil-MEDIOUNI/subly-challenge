@@ -58,7 +58,7 @@ export const CardStatus = styled.p`
 export const CardLanguages = styled.div`
   position: absolute;
   bottom: 1rem;
-  right: 0.75rem;
+  right: 1rem;
   display: flex;
   opacity: 0;
   transition: 0.2s ease-in-out;
