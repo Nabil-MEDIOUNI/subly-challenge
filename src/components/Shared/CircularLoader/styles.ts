@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ErrorMessage = styled.h4`
+export const LoaderContainer = styled.div`
   position: absolute;
   top: 45%;
   left: 50%;
