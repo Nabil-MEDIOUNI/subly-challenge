@@ -7,6 +7,9 @@ export const SingleCardContainer = styled.div`
   margin: 12px;
   :hover {
     box-shadow: 0px 0px 10px #d8d8d8;
+    .card-languages {
+      opacity: 1;
+    }
   }
   @media only screen and (max-width: 920px) {
     width: 95%;
@@ -33,7 +36,7 @@ export const ImageContainer = styled.div<{ picture: string; status: string }>`
   }
 `;
 
-export const CardContant = styled.div``;
+export const CardContent = styled.div``;
 
 export const CardTitle = styled.h2`
   font-size: 16px;
@@ -50,6 +53,24 @@ export const CardStatus = styled.p`
   color: gray;
   padding-bottom: 16px;
   padding-left: 16px;
+`;
+
+export const CardLanguages = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  right: 0.75rem;
+  display: flex;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+`;
+
+export const LanguageMessage = styled.p`
+  font-size: 12px;
+  margin: 0;
+  margin-top: 4px;
+  color: gray;
+  padding-left: 4px;
+  text-transform: uppercase;
 `;
 
 export const EditFileContainer = styled.div`
@@ -173,4 +194,55 @@ export const TranscribingMessage = styled.p`
   font-size: 14px;
   text-align: center;
   margin-bottom: 4rem;
+`;
+
+export const ProgressContainer = styled.div`
+  width: 80%;
+  padding-left: 2px;
+  padding-right: 2px;
+  height: 10px;
+  border-radius: 5px;
+  border: solid 3px #4e4e4e;
+  background-color: #1e1e1e;
+  position: absolute;
+  top: calc(50% - 13px);
+  left: 2rem;
+`;
+
+export const TrackContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  -webkit-animation: prgBar 5s linear 0s infinite alternate;
+  animation: prgBar 5s linear 0s infinite alternate;
+  @keyframes prgBar {
+    0% {
+      width: 0%;
+    }
+    9.99% {
+      width: 0%;
+    }
+    10% {
+      width: 10%;
+    }
+    95% {
+      width: 100%;
+    }
+  }
+`;
+
+export const BarContainer = styled.div`
+  height: 5px;
+  width: 6px;
+  background-color: #00ffff;
+  position: relative;
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px #00ffff;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 100px;
+  top: 3px;
+  float: left;
+  clear: top;
 `;

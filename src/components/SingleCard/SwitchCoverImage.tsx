@@ -1,4 +1,10 @@
+import { useDispatch } from 'react-redux';
+
 import { Delete, ErrorOutline } from '@material-ui/icons';
+
+import { deleteData } from '../../redux/actions/data';
+
+import { DataType } from '../../interfaces';
 
 import {
   EditFileContainer,
@@ -12,19 +18,28 @@ import {
   ReportIssueButton,
   TranscribingFileContainer,
   TranscribingMessage,
+  ProgressContainer,
+  TrackContainer,
+  BarContainer,
 } from './styles';
 
 interface SwitchStatusProps {
-  status: string;
+  media: DataType;
 }
 
-export default function SwitchCoverImage({ status }: SwitchStatusProps) {
-  switch (status) {
+export default function SwitchCoverImage({ media }: SwitchStatusProps) {
+  const dispatch: any = useDispatch();
+
+  const deleteFile = () => {
+    dispatch(deleteData(media));
+  };
+
+  switch (media.status) {
     case 'ready':
       return (
         <EditFileContainer className="edit-file-container">
           <EditFileButton>Edit</EditFileButton>
-          <DeleteRecycleButton>
+          <DeleteRecycleButton onClick={deleteFile}>
             <Delete />
           </DeleteRecycleButton>
         </EditFileContainer>
@@ -40,7 +55,9 @@ export default function SwitchCoverImage({ status }: SwitchStatusProps) {
             </ErrorMessage>
           </ErrorMessageContainer>
           <ErrorButtonsContainer>
-            <DeleteFileButton>Delete file</DeleteFileButton>
+            <DeleteFileButton onClick={deleteFile}>
+              Delete file
+            </DeleteFileButton>
             <ReportIssueButton>Report issue</ReportIssueButton>
           </ErrorButtonsContainer>
         </ErrorFileContainer>
@@ -49,13 +66,13 @@ export default function SwitchCoverImage({ status }: SwitchStatusProps) {
       return (
         <TranscribingFileContainer>
           <TranscribingMessage>Transcribing subtitles</TranscribingMessage>
-          <div className="progress">
-            <div className="track">
-              {[...Array(30)].map(() => (
-                <div className="bar"></div>
+          <ProgressContainer>
+            <TrackContainer className="track">
+              {[...Array(30)].map((_, i) => (
+                <BarContainer key={i} className="bar" />
               ))}
-            </div>
-          </div>
+            </TrackContainer>
+          </ProgressContainer>
         </TranscribingFileContainer>
       );
   }

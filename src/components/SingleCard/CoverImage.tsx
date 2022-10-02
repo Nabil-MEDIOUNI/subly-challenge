@@ -1,16 +1,17 @@
 import SwitchCoverImage from './SwitchCoverImage';
 
+import { DataType } from '../../interfaces';
+
 import { ImageContainer } from './styles';
 
 interface CoverImageProps {
-  cover: string;
-  status: string;
+  media: DataType;
 }
 
-export default function CoverImage({ cover, status }: CoverImageProps) {
+export default function CoverImage({ media }: CoverImageProps) {
   return (
-    <ImageContainer picture={cover} status={status}>
-      <SwitchCoverImage status={status} />
+    <ImageContainer picture={media.cover} status={media.status}>
+      <SwitchCoverImage media={media} />
     </ImageContainer>
   );
 }
