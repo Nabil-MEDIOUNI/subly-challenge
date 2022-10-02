@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import CardsList from './components/CardsList/index';
 import Header from './components/Header';
+import Filters from './components/Filters/index';
+import CardsList from './components/CardsList/index';
 
 import { getData } from './redux/actions/data';
 
@@ -18,6 +19,7 @@ function App() {
   return (
     <PageContainer>
       <Header />
+      <Filters />
       <CardsList />
     </PageContainer>
   );
