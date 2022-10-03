@@ -7,6 +7,7 @@ const {
   LOAD_DATA,
   FAIL_DATA,
   FILTER_DATA,
+  CLEAR_FILTER_DATA,
 } = require('../constants/data');
 
 // initialstate
@@ -29,12 +30,18 @@ const dataReducer = (state = initialState, { type, payload }: any) => {
       );
       return { ...state, data: newData, loading: false };
     case FILTER_DATA:
-      const { key, value } = payload;
       return {
         ...state,
-        filters: { ...state.filters, [key]: value },
+        filters: { ...state.filters, [payload.key]: payload.value },
         loading: false,
       };
+    case CLEAR_FILTER_DATA:
+      return {
+        ...state,
+        filters: payload,
+        loading: false,
+      };
+
     case FAIL_DATA:
       return { ...state, error: payload };
     default:

@@ -7,6 +7,7 @@ import {
   DELETE_DATA,
   LOAD_DATA,
   FILTER_DATA,
+  CLEAR_FILTER_DATA,
 } from '../constants/data';
 
 import { API } from '../../config';
@@ -42,12 +43,18 @@ interface FilterDataType {
   payload: FilterType;
 }
 
+interface ClearFiltersDataType {
+  type: typeof CLEAR_FILTER_DATA;
+  payload: {};
+}
+
 export type DataDispatchTypes =
   | LoadDataType
   | ErrorDataType
   | GetDataType
   | DeleteDataType
-  | FilterDataType;
+  | FilterDataType
+  | ClearFiltersDataType;
 
 export const getData = () => async (dispatch: Dispatch<DataDispatchTypes>) => {
   dispatch({ type: LOAD_DATA });
@@ -75,8 +82,17 @@ export const filterData =
   (key: string, value: string) => (dispatch: Dispatch<DataDispatchTypes>) => {
     dispatch({ type: LOAD_DATA });
     try {
-      console.log('first');
       dispatch({ type: FILTER_DATA, payload: { key, value } });
+    } catch (error: any) {
+      dispatch({ type: FAIL_DATA, payload: 'Error Occured!' });
+    }
+  };
+
+export const clearFiltersData =
+  () => (dispatch: Dispatch<DataDispatchTypes>) => {
+    dispatch({ type: LOAD_DATA });
+    try {
+      dispatch({ type: CLEAR_FILTER_DATA, payload: {} });
     } catch (error: any) {
       dispatch({ type: FAIL_DATA, payload: 'Error Occured!' });
     }
