@@ -7,7 +7,7 @@ import CardsList from './components/CardsList/index';
 
 import { getData } from './redux/actions/data';
 
-import { PageContainer } from './utils/styles';
+import { Container } from './utils/styles';
 
 function App() {
   const dispatch: any = useDispatch();
@@ -17,11 +17,11 @@ function App() {
   }, [dispatch]);
 
   return (
-    <PageContainer>
+    <Container>
       <Header />
       <Filters />
       <CardsList />
-    </PageContainer>
+    </Container>
   );
 }
 

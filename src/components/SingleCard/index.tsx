@@ -5,11 +5,11 @@ import { DataType } from '../../interfaces/index';
 
 import {
   SingleCardContainer,
-  CardContent,
   CardTitle,
   CardLanguages,
   LanguageMessage,
 } from './styles';
+import { Container } from '../../utils/styles';
 
 interface SingleCardProps {
   media: DataType;
@@ -19,10 +19,10 @@ export default function SingleCard({ media }: SingleCardProps) {
   return (
     <SingleCardContainer>
       <CoverImage media={media} />
-      <CardContent>
+      <Container>
         <CardTitle>{media.name}</CardTitle>
         <Status status={media.status} updatedAt={media.updatedAt} />
-      </CardContent>
+      </Container>
       <CardLanguages className="card-languages">
         {media.languages.map((language) => (
           <LanguageMessage key={language}>{language}</LanguageMessage>

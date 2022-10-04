@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const PageContainer = styled.div`
-  height: 100vh;
-`;
+export const Container = styled.div``;
 
 export const ErrorMessage = styled.h4`
   position: absolute;

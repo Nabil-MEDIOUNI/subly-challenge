@@ -36,8 +36,6 @@ export const ImageContainer = styled.div<{ picture: string; status: string }>`
   }
 `;
 
-export const CardContent = styled.div``;
-
 export const CardTitle = styled.h2`
   font-size: 16px;
   font-weight: 600;

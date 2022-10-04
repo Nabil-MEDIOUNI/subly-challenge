@@ -1,17 +1,7 @@
 {
   "short_name": "Subly Challenge",
   "name": "Subly Challenge",
-  "icons": [{
-      "src": "https://uploads-ssl.webflow.com/61e81392cdf29f010bb62bdc/61f2c41f3c80f881445d79f7_Touch%20Icon-1.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "https://uploads-ssl.webflow.com/61e81392cdf29f010bb62bdc/61f2c41f3c80f881445d79f7_Touch%20Icon-1.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
