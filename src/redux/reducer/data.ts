@@ -3,6 +3,7 @@ import { DataType } from '../../interfaces';
 // import types
 const {
   GET_DATA,
+  EDIT_DATA,
   DELETE_DATA,
   LOAD_DATA,
   FAIL_DATA,
@@ -24,6 +25,16 @@ const dataReducer = (state = initialState, { type, payload }: any) => {
       return { ...state, loading: true };
     case GET_DATA:
       return { ...state, data: payload, loading: false };
+    case EDIT_DATA:
+      // const editedData = state.data.filter(
+      //   (oldData: DataType) => oldData.id !== payload.id,
+      // );
+
+      const editedData = state.data.map((oldData: DataType) =>
+        oldData.id === payload.id ? { ...oldData, ...payload } : oldData,
+      );
+
+      return { ...state, data: editedData, loading: false };
     case DELETE_DATA:
       const newData = state.data.filter(
         (oldData: DataType) => oldData.id !== payload.id,

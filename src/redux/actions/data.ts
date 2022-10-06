@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
   FAIL_DATA,
   GET_DATA,
+  EDIT_DATA,
   DELETE_DATA,
   LOAD_DATA,
   FILTER_DATA,
@@ -33,6 +34,11 @@ interface FilterType {
   value: string;
 }
 
+interface EditDataType {
+  type: typeof EDIT_DATA;
+  payload: any;
+}
+
 interface DeleteDataType {
   type: typeof DELETE_DATA;
   payload: DataType;
@@ -52,6 +58,7 @@ export type DataDispatchTypes =
   | LoadDataType
   | ErrorDataType
   | GetDataType
+  | EditDataType
   | DeleteDataType
   | FilterDataType
   | ClearFiltersDataType;
@@ -67,6 +74,16 @@ export const getData = () => async (dispatch: Dispatch<DataDispatchTypes>) => {
     dispatch({ type: FAIL_DATA, payload: 'Error Occured!' });
   }
 };
+
+export const editData =
+  (data: any) => async (dispatch: Dispatch<DataDispatchTypes>) => {
+    dispatch({ type: LOAD_DATA });
+    try {
+      dispatch({ type: EDIT_DATA, payload: data });
+    } catch (error: any) {
+      dispatch({ type: FAIL_DATA, payload: 'Error Occured!' });
+    }
+  };
 
 export const deleteData =
   (data: DataType) => async (dispatch: Dispatch<DataDispatchTypes>) => {

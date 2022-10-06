@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Delete, ErrorOutline } from '@material-ui/icons';
 
-import { deleteData } from '../../redux/actions/data';
+import EditCardModal from '../EditCardModal';
+
+import { editData, deleteData } from '../../redux/actions/data';
 
 import { DataType } from '../../interfaces';
 
@@ -28,21 +31,61 @@ interface SwitchStatusProps {
 }
 
 export default function SwitchCoverImage({ media }: SwitchStatusProps) {
+  const [editModalIsOpen, setOpenEditModal] = useState(false);
+  const [formData, setFormData] = useState({});
+
   const dispatch: any = useDispatch();
 
   const deleteFile = () => {
     dispatch(deleteData(media));
   };
 
+  const onOpenEditModal = () => {
+    setFormData(media);
+    setOpenEditModal(true);
+  };
+
+  const onCloseEditModal = () => {
+    setOpenEditModal(false);
+  };
+
+  const onHandleEditChange = (event: any) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const handleUploadFile = (event: any) => {
+    setFormData({
+      ...formData,
+      cover: URL.createObjectURL(event.target.files[0]),
+    });
+  };
+
+  const onSaveEdit = (e: any) => {
+    e.preventDefault();
+    dispatch(editData({ ...formData, updatedAt: new Date() }));
+    onCloseEditModal();
+  };
+
   switch (media.status) {
     case 'ready':
       return (
-        <EditFileContainer className="edit-file-container">
-          <EditFileButton>Edit</EditFileButton>
-          <DeleteRecycleButton onClick={deleteFile}>
-            <Delete />
-          </DeleteRecycleButton>
-        </EditFileContainer>
+        <>
+          <EditFileContainer className="edit-file-container">
+            <EditFileButton onClick={onOpenEditModal}>Edit</EditFileButton>
+            <DeleteRecycleButton onClick={deleteFile}>
+              <Delete />
+            </DeleteRecycleButton>
+          </EditFileContainer>
+          {editModalIsOpen && (
+            <EditCardModal
+              formData={formData}
+              onCloseEditModal={onCloseEditModal}
+              onHandleEditChange={onHandleEditChange}
+              handleUploadFile={handleUploadFile}
+              onSaveEdit={onSaveEdit}
+            />
+          )}
+        </>
       );
     case 'error':
       return (
